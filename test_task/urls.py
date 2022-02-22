@@ -16,11 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from app.views import AssignmentView
+from app.views import AssignmentView, PdfGenerate
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('assignment',AssignmentView.as_view(),name='assignment'),
-    path('assignment/<int:pk>/', AssignmentView.as_view())
+    path('assignment/<int:pk>/', AssignmentView.as_view()),
+    path('pdf/<int:pk>/', PdfGenerate.as_view())
 ]

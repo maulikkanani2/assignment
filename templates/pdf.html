@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Title</title>
+        <style type="text/css">
+            img{
+                width: 300px;
+                height: 200px;
+                object-fit: cover;
+            }
+            .img_inner{
+                width: 20%;
+                display: inline-block;
+            }
+            .content_inner{
+                width: 79%;
+                display: inline-block;
+                float: right;
+                text-align: center;
+                height: 200px;
+            }
+            .content_inner h1{
+                font-size: 38px;
+                margin: 40px 0px;
+            }
+            .content_inner h2{
+                font-size: 35px;
+            }
+            .day{
+                width: 50%;
+                border: 1px solid #ccc;
+                border-left: 0;
+                padding: 15px;
+            }
+            .date{
+                width: 50%;
+                border: 1px solid #ccc;
+                padding: 15px;
+            }
+            .date h5, .day h5{
+                margin: 0;
+                font-size: 22px;
+            }
+            .date p, .day p{
+                margin: 0;
+                font-size: 18px;
+            }
+            .date_day{
+                display: flex;
+                margin-bottom: 25px;
+            }
+            table, th, td {
+                border-collapse: collapse;
+                border: 1px solid #ccc;
+                text-align: left;
+                vertical-align: middle;
+                padding: 15px;
+                font-size: 19px;
+
+            }
+            table{
+                width: 100%;
+            }
+            table p{
+                margin: 0;
+            }
+            .main_inner{
+                margin-bottom: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="table_inner">
+            <table>
+                    <tr>
+                        <th>title</th>
+                        <td>{{data.title}}</td>
+                    </tr>
+                    <tr>
+                        <th>description</th>
+                        <td>{{data.description}}</td>
+                    </tr>
+                    <tr>
+                        <th>music_genre</th>
+                        <td>{{data.music_genre}}</td>
+                    </tr>
+                    <tr>
+                        <th>daily_practice_time</th>
+                        <td>{{data.daily_practice_time}}</td>
+                    </tr>
+                    <tr>
+                        <th>days</th>
+                        <td>{{data.days}}</td>
+                    </tr>
+                    <tr>
+                        <th>days_practiced</th>
+                        <td>{{data.days_practiced}}</td>
+                    </tr>
+            </table>
+        </div>
+    </body>
+</html>
