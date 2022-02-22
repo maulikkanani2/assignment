@@ -9,6 +9,7 @@ class Assignment(models.Model):
     daily_practice_time = models.IntegerField()
     days = models.IntegerField()
     days_practiced = models.IntegerField()
+    base = models.TextField(null=True, blank=True)
     
     def __str__(self):
         return self.title

@@ -4,9 +4,12 @@ from rest_framework.views import APIView
 
 from app.models import Assignment
 from app.serialzer import AssignmentSeializer
-from io import BytesIO
 from django.http import HttpResponse
 from django.template.loader import get_template
+from django.template.loader import render_to_string
+from weasyprint import HTML
+from django.core.files.storage import FileSystemStorage
+import base64
 
 class AssignmentView(APIView):
     def get(self, request, pk=None, format=None):
@@ -44,9 +47,6 @@ class AssignmentView(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-from django.template.loader import render_to_string
-from weasyprint import HTML
-from django.core.files.storage import FileSystemStorage
 class PdfGenerate(APIView):
     def get(self, request, pk, *args, **kwargs):
         assignment = Assignment.objects.get(id=pk)
@@ -65,9 +65,10 @@ class PdfGenerate(APIView):
         html.write_pdf(target='/tmp/pdf.pdf');
 
         fs = FileSystemStorage('/tmp')
-        with fs.open('pdf.pdf') as pdf:
+        with fs.open('pdf.pdf', "rb") as pdf:
+            encoded_string = base64.b64encode(pdf.read())
+            assignment.base = encoded_string
+            assignment.save()
             response = HttpResponse(pdf, content_type='application/pdf')
             response['Content-Disposition'] = 'attachment; filename="pdf.pdf"'
-            return response
-
-        return response
+            return HttpResponse(encoded_string) 
