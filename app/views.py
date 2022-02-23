@@ -67,7 +67,8 @@ class PdfGenerate(APIView):
         fs = FileSystemStorage('/tmp')
         with fs.open('pdf.pdf', "rb") as pdf:
             encoded_string = base64.b64encode(pdf.read())
-            assignment.base = encoded_string
+            base = encoded_string.decode('UTF-8')
+            assignment.base = base
             assignment.save()
             response = HttpResponse(pdf, content_type='application/pdf')
             response['Content-Disposition'] = 'attachment; filename="pdf.pdf"'
